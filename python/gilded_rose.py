@@ -4,6 +4,7 @@ class GildedRose(object):
     BRIE = "Aged Brie"
     CONCERT = "Backstage passes to a TAFKAL80ETC concert"
     SULFUR = "Sulfuras, Hand of Ragnaros"
+    CONJURED = "Conjured"
 
     def __init__(self, items):
         self.items = items
@@ -13,6 +14,8 @@ class GildedRose(object):
             if item.name != self.SULFUR:
                 if item.name != self.CONCERT and item.name != self.BRIE:
                     item.quality = max(0, item.quality - 1)
+                    if item.name == self.CONJURED:
+                        item.quality = max(0, item.quality - 1)
                 else:
                     additional = 1
                     if item.name == self.CONCERT:
@@ -32,6 +35,8 @@ class GildedRose(object):
                         item.quality = min(50, item.quality + 1)
                     else:
                         item.quality = max(0, item.quality - 1)
+                        if item.name == self.CONJURED:
+                            item.quality = max(0, item.quality - 1)
 
 
                     

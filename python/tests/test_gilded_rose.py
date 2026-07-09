@@ -7,6 +7,7 @@ NORMAL = "cheese"
 BRIE = "Aged Brie"
 CONCERT = "Backstage passes to a TAFKAL80ETC concert"
 SULFUR = "Sulfuras, Hand of Ragnaros"
+CONJURED = "Conjured"
 
 class GildedRoseTest(unittest.TestCase):
     def test_name(self):
@@ -79,6 +80,18 @@ class GildedRoseTest(unittest.TestCase):
     def test_repr(self):
         items = [Item(NORMAL, 10, 10)]
         self.assertEqual("cheese, 10, 10", items[0].__repr__())
+
+    def test_conjured_before_sellin(self):
+        items = [Item(CONJURED, 1, 20)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(18, items[0].quality)
+
+    def test_conjured_after_sellin(self):
+        items = [Item(CONJURED, 0, 20)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(16, items[0].quality)
     
     
 
